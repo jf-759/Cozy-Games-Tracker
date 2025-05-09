@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Add a New Game</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=40) }}
+        </p>
+        <p>
+            {{ form.genre.label }}<br>
+            {{ form.genre(size=40) }}
+        </p>
+        <p>
+            {{ form.platform.label }}<br>
+            {{ form.platform(size=40) }}
+        </p>
+        <p>
+            {{ form.status.label }}<br>
+            {{ form.status() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+{% endblock %}
