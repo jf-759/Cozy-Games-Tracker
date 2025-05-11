@@ -1,5 +1,5 @@
-from flask import render_template, redirect, url_for, request, flash
-from flask_login import login_required, current_user, login_user, logout_user
+from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Game, Review
 from . import db, login_manager
@@ -7,6 +7,7 @@ from .forms import GameForm, ReviewForm, SignupForm, LoginForm
 from flask import Blueprint
 
 auth = Blueprint('auth', __name__)
+main = Blueprint('main', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):

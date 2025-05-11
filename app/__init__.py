@@ -12,12 +12,14 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'login'
+    login_manager.login_view = 'auth.login'  # Update to match your blueprint's 'login' route
 
-    from .auth import auth as auth_blueprint
-    from .routes import main as main_blueprint
-
+    # Register the auth blueprint
+    from .routes import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
+
+    # Register the main blueprint
+    from .routes import main as main_blueprint  # Ensure main blueprint is also imported
     app.register_blueprint(main_blueprint)
 
     return app
