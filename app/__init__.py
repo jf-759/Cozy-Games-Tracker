@@ -7,19 +7,18 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['SECRET_KEY'] = 'supersecretkey'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cozygames.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'  # Update to match your blueprint's 'login' route
 
-    # Register the auth blueprint
-    from .routes import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
-
-    # Register the main blueprint
-    from .routes import main as main_blueprint  # Ensure main blueprint is also imported
-    app.register_blueprint(main_blueprint)
+    # Register blueprints (wrap these in try/except if you're not done with them yet)
+    try:
+        from app.routes.auth import auth_bp
+        app.register_blueprint(auth_bp)
+    except ImportError:
+        pass
 
     return app
