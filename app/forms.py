@@ -24,3 +24,13 @@ class ReviewForm(FlaskForm):
     content = TextAreaField('Review', validators=[DataRequired()])
     rating = IntegerField('Rating (1–10)', validators=[DataRequired()])
     submit = SubmitField('Submit Review')
+
+class NewGameForm(FlaskForm):
+    title = StringField(' Game Title', validators=[DataRequired()])
+    status = SelectField('Status', choices=[('Wishlist', 'Wishlist'), ('Playing', 'Playing'), ('Completed', 'Completed')], validators=[DataRequired()])
+    genre = StringField('Genre')
+    platform = StringField('Platform')
+    description = TextAreaField('Description')
+    cozy_elements = StringField('Cozy Elements')
+    image_url = StringField('Image URL')
+    submit = SubmitField('Add Game')

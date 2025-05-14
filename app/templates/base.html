@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>Cozy Game Tracker</title>
 
-    <!-- ✅ Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- ✅ Tailwind Custom Theme Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -28,12 +26,10 @@
         }
     </script>
 
-    <!-- ✅ Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Quicksand&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-cream font-body text-gray-800 min-h-screen px-4 py-6">
-    <!-- ✅ Cozy Nav -->
     <nav class="bg-rose text-white py-4 px-6 rounded-xl mb-6 shadow-md flex justify-between items-center">
         <a href="{{ url_for('main.dashboard') }}" class="font-cozy text-xl">Cozy Game Tracker</a>
         <div class="space-x-4 text-sm">
