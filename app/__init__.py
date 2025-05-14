@@ -13,12 +13,17 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
 
-    # Register blueprints (wrap these in try/except if you're not done with them yet)
-    try:
-        from app.routes.auth import auth_bp
-        app.register_blueprint(auth_bp)
-    except ImportError:
-        pass
+    # Register blueprints
+    from app.routes.auth import auth_bp
+    from app.routes.game import game_bp
+    from app.routes.log import log_bp
+    from app.routes.main import main_bp  # <-- Make sure this one exists!
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(game_bp)
+    app.register_blueprint(log_bp)
+    app.register_blueprint(main_bp)  # <-- This handles the homepage
 
     return app

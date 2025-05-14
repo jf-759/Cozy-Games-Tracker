@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
- <h2>Sign Up</h2>
- <form method="POST">
+<h2>Sign Up</h2>
+<form method="POST">
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}
     </p>
     <p>
-        {{ form.password.label }}<br>
-        {{ form.username(size=32) }}
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}
     </p>
-    <p> {{ form.submit() }}</p>
- </form>
- <p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
-
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+</form>
+<p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
 {% endblock %}

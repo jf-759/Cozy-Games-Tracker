@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="max-w-4xl mx-auto mt-8">
-    <h2 class="text-2xl font-bold mb-4">Welcome, {{ current_user.username }}!</h2>
+    <h2 class="text-2xl font-cozy mb-4">Welcome, {{ current_user.username }}!</h2>
 
     <a href="{{ url_for('main.new_game') }}" class="inline-block mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
       + Add New Game

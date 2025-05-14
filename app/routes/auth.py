@@ -5,42 +5,53 @@ from .. import db, login_manager
 from ..models import User
 from ..forms import SignupForm, LoginForm
 from flask import Blueprint
+from app.forms import SignupForm  
 
-auth = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
+        existing_user = User.query.filter_by(username=form.username.data).first()
+        if existing_user:
             flash('Username already exists')
             return redirect(url_for('auth.signup'))
 
-        new_user = User(username=form.username.data, password=generate_password_hash(form.password.data))
+        new_user = User(
+            username=form.username.data, 
+            email=form.email.data,
+        )
+        new_user.set_password(form.password.data)
+
         db.session.add(new_user)
         db.session.commit()
+        flash('Account created successfully! Please log in.')
+        
         return redirect(url_for('auth.login'))
 
     return render_template('signup.html', form=form)
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if not user or not check_password_hash(user.password, form.password.data):
-            flash('Invalid credentials')
+        if not user or not user.check_password(form.password.data):  # Use user.check_password
+            flash('Invalid credentials', 'danger')
             return redirect(url_for('auth.login'))
         login_user(user)
+        flash('Login successful!', 'success')
         return redirect(url_for('main.dashboard'))
     return render_template('login.html', form=form)
 
-@auth.route('/logout')
+
+
+@auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
