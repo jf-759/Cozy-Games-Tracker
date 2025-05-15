@@ -12,46 +12,6 @@ def list_games():
     games = Game.query.filter_by(user_id=current_user.id).all()  
     return render_template('games/list.html', games=games)
 
-# @game_bp.route('/add', methods=['GET', 'POST'])
-# @login_required  
-# def add_game():
-#     if request.method == 'POST':
-#         title = request.form['title']
-#         genre = request.form['genre']
-#         platform = request.form['platform']
-#         description = request.form['description']
-#         cozy_elements = request.form['cozy_elements']
-#         image_url = request.form['image_url']
-
-#         new_game = Game(
-#             title=title,
-#             genre=genre,
-#             platform=platform,
-#             description=description,
-#             cozy_elements=cozy_elements,
-#             image_url=image_url,
-#             user_id=current_user.id 
-#         )
-
-#         db.session.add(new_game)
-#         db.session.commit()
-
-#         new_gamelog =Game(
-#             user_id=current_user.id,
-#             game_id=new_game.id,
-#             status='Not Started',
-#             notes='',
-#             rating=0
-#         )
-
-#         db.session.add(new_gamelog)
-#         db.session.commit() 
-
-#         flash('Game added successfully!')
-#         return redirect(url_for('game.list_games'))
-
-#     return render_template('games/add.html')
-
 @game_bp.route('/add', methods=['GET', 'POST'])
 @login_required  
 def add_game():
@@ -66,7 +26,6 @@ def add_game():
         db.session.add(new_game)
         db.session.commit()
 
-        # Create initial GameLog for status
         new_log = GameLog(
             user_id=current_user.id,
             game_id=new_game.id,

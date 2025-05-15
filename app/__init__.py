@@ -19,15 +19,15 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
-    # Register blueprints
+
     from app.routes.auth import auth_bp
     from app.routes.game import game_bp
     from app.routes.log import log_bp
-    from app.routes.main import main_bp  # <-- Keep this import here
+    from app.routes.main import main_bp  
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(game_bp)
     app.register_blueprint(log_bp)
-    app.register_blueprint(main_bp)  # <-- This should work now
+    app.register_blueprint(main_bp) 
 
     return app

@@ -20,7 +20,7 @@ class GameForm(FlaskForm):
     description = TextAreaField('Description')
     cozy_elements = TextAreaField('Cozy Elements')
     image_url = StringField('Image URL')
-    status = SelectField('Status', choices=[('Backlog', 'Backlog'), ('Playing', 'Playing'), ('Completed', 'Completed')])
+    status = SelectField('Status', choices=[('Wishlist', 'Wishlist'), ('Playing', 'Playing'), ('Completed', 'Completed')])
     submit = SubmitField('Add Game')
 
 class ReviewForm(FlaskForm):

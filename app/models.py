@@ -46,16 +46,16 @@ class Game(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', back_populates='games')
 
-# GameLog model (association table)
+# GameLog model 
 class GameLog(db.Model):
     __tablename__ = "gamelogs"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
-    status = db.Column(db.String(20))  # Wishlist, Playing, Completed
+    status = db.Column(db.String(20))  
     notes = db.Column(db.Text)
-    rating = db.Column(db.Integer)  # 1 to 5 stars
+    rating = db.Column(db.Integer) 
 
     user = db.relationship('User', back_populates='gamelogs')
     game = db.relationship('Game', back_populates='gamelogs')

@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Sign Up</h2>
-<form method="POST">
+<h2 class="text-xl font-cozy mb-4 text-center">Create Your Cozy Game Tracker Account</h2>
+
+<form method="POST" class="space-y-4 bg-blush/20 p-6 rounded-lg shadow-md max-w-md mx-auto">
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}
-    </p>
-    <p>
-        {{ form.email.label }}<br>
-        {{ form.email(size=32) }}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}
-    </p>
-    <p>
-        {{ form.submit() }}
+
+    <label class="block">
+        <span class="text-gray-700">{{ form.username.label }}</span>
+        {{ form.username(class="w-full mt-1 p-2 rounded-lg border") }}
+        {% for error in form.username.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+        {% endfor %}
+    </label>
+
+    <label class="block">
+        <span class="text-gray-700">{{ form.email.label }}</span>
+        {{ form.email(class="w-full mt-1 p-2 rounded-lg border") }}
+        {% for error in form.email.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+        {% endfor %}
+    </label>
+
+    <label class="block">
+        <span class="text-gray-700">{{ form.password.label }}</span>
+        {{ form.password(class="w-full mt-1 p-2 rounded-lg border") }}
+        {% for error in form.password.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+        {% endfor %}
+    </label>
+
+    {{ form.submit(class="bg-sage text-white px-4 py-2 rounded-lg hover:bg-sage/70 transition w-full") }}
+
+    <p class="text-sm mt-2 text-center">
+        Already have an account? 
+        <a href="{{ url_for('auth.login') }}" class="text-rose hover:underline">Log in here</a>.
     </p>
 </form>
-<p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
 {% endblock %}

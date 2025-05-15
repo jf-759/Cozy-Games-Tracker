@@ -1,38 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- <h2 class="text-xl font-cozy mb-4">Login to Cozy Game Tracker</h2>
-
-<form method="POST" class="space-y-4 bg-blush/20 p-6 rounded-lg shadow-md max-w-md mx-auto">
-    <label class="block">
-        <span class="text-gray-700">Username</span>
-        <input type="text" name="username" class="w-full mt-1 p-2 rounded-lg border" required>
-    </label>
-
-    <label class="block">
-        <span class="text-gray-700">Password</span>
-        <input type="password" name="password" class="w-full mt-1 p-2 rounded-lg border" required>
-    </label>
-
-    <button type="submit" class="bg-sage text-white px-4 py-2 rounded-lg hover:bg-sage/90 transition">
-        Login
-    </button>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-
-    <p class="text-sm mt-2">Don't have an account? 
-        <a href="{{ url_for('auth.signup') }}" class="text-rose hover:underline">Sign up here</a>.
-    </p>
-</form> -->
 
 <h2 class="text-xl font-cozy mb-4">Login to Cozy Game Tracker</h2>
 
@@ -49,7 +17,7 @@
         {{ form.password(class="w-full mt-1 p-2 rounded-lg border") }}
     </label>
 
-    {{ form.submit(class="bg-sage text-white px-4 py-2 rounded-lg hover:bg-sage/90 transition") }}
+    {{ form.submit(class="bg-sage text-white px-4 py-2 rounded-lg hover:bg-sage/70 transition") }}
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="text-2xl font-cozy mb-4 text-center">Edit Game</h2>
+
+  <form method="POST" action="" class="space-y-4 bg-blush/20 p-6 rounded-lg shadow-md max-w-md mx-auto">
+    {{ form.hidden_tag() }}
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.title.label }}</span>
+      {{ form.title(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.title.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.genre.label }}</span>
+      {{ form.genre(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.genre.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.platform.label }}</span>
+      {{ form.platform(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.platform.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.description.label }}</span>
+      {{ form.description(class="w-full mt-1 p-2 rounded-lg border", rows=5) }}
+      {% for error in form.description.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.cozy_elements.label }}</span>
+      {{ form.cozy_elements(class="w-full mt-1 p-2 rounded-lg border", rows=3) }}
+      {% for error in form.cozy_elements.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.image_url.label }}</span>
+      {{ form.image_url(class="w-full mt-1 p-2 rounded-lg border", id="image_url") }}
+      {% for error in form.image_url.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+
+      {% if form.image_url.data %}
+        <img id="image_preview" src="{{ form.image_url.data }}" alt="Game Image" class="mt-4 max-h-48 rounded shadow-md object-contain" />
+      {% else %}
+        <img id="image_preview" src="" alt="No Image" class="mt-4 max-h-48 rounded shadow-md object-contain hidden" />
+      {% endif %}
+    </label>
+
+    <script>
+      const imageUrlInput = document.getElementById('image_url');
+      const imagePreview = document.getElementById('image_preview');
+
+      imageUrlInput.addEventListener('input', () => {
+        const url = imageUrlInput.value.trim();
+        if (url) {
+          imagePreview.src = url;
+          imagePreview.classList.remove('hidden');
+        } else {
+          imagePreview.src = '';
+          imagePreview.classList.add('hidden');
+        }
+      });
+    </script>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.status.label }}</span>
+      {{ form.status(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.status.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <button type="submit" class="w-full py-3 bg-sage text-white font-semibold rounded-lg hover:bg-sage/90 transition">
+      Save Changes
+    </button>
+  </form>
+{% endblock %}

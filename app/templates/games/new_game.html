@@ -1,27 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <h2 class="text-2xl font-cozy mb-4 text-center">Add a New Game</h2>
 
-    <h2>Add a New Game</h2>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.title.label }}<br>
-            {{ form.title(size=40) }}
-        </p>
-        <p>
-            {{ form.genre.label }}<br>
-            {{ form.genre(size=40) }}
-        </p>
-        <p>
-            {{ form.platform.label }}<br>
-            {{ form.platform(size=40) }}
-        </p>
-        <p>
-            {{ form.status.label }}<br>
-            {{ form.status() }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+  <form method="POST" class="space-y-4 bg-blush/20 p-6 rounded-lg shadow-md max-w-md mx-auto">
+    {{ form.hidden_tag() }}
 
+    <label class="block">
+      <span class="text-gray-700">{{ form.title.label }}</span>
+      {{ form.title(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.title.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.genre.label }}</span>
+      {{ form.genre(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.genre.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.platform.label }}</span>
+      {{ form.platform(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.platform.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <label class="block">
+      <span class="text-gray-700">{{ form.status.label }}</span>
+      {{ form.status(class="w-full mt-1 p-2 rounded-lg border") }}
+      {% for error in form.status.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </label>
+
+    <button type="submit" class="w-full py-3 bg-sage text-white font-semibold rounded-lg hover:bg-sage/70 transition">
+      Add Game
+    </button>
+  </form>
 {% endblock %}
