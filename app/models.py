@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password_hash = db.Column(db.String(128), nullable=False)
 
+    games = db.relationship('Game', back_populates='user', cascade="all, delete-orphan")
     gamelogs = db.relationship('GameLog', back_populates='user', cascade="all, delete-orphan")
 
     def set_password(self, password):
@@ -42,7 +43,8 @@ class Game(db.Model):
     image_url = db.Column(db.String(255))
 
     gamelogs = db.relationship('GameLog', back_populates='game', cascade="all, delete-orphan")
-
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship('User', back_populates='games')
 
 # GameLog model (association table)
 class GameLog(db.Model):

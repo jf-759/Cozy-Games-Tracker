@@ -17,6 +17,9 @@ class GameForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     genre = StringField('Genre')
     platform = StringField('Platform')
+    description = TextAreaField('Description')
+    cozy_elements = TextAreaField('Cozy Elements')
+    image_url = StringField('Image URL')
     status = SelectField('Status', choices=[('Backlog', 'Backlog'), ('Playing', 'Playing'), ('Completed', 'Completed')])
     submit = SubmitField('Add Game')
 
